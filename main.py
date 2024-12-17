@@ -32,7 +32,8 @@ def blog():
 #here we take the query parameter as per our need
 #but to make it accessible via path parameter
 
-
+def index(limit):
+    return {"data":f"{limit} are being displayed from the list"}
 
 @app.get('/blog/unpublished')
 def unpublished():
