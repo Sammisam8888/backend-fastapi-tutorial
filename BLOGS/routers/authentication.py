@@ -11,8 +11,8 @@ router = APIRouter(
 
 get_db = database.get_db
 
-@router.post('/login', response_model=schemas.Token)
-def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+@router.post('/login')
+def login(request:OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email == request.username).first()
     
     if not user:
@@ -28,10 +28,9 @@ def login(request: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(
         )
     
     # Generate access token
-    access_token_expires = timedelta(minutes=mytoken.ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = mytoken.create_access_token(
-        data={"sub": user.email}, expires_delta=access_token_expires
+        data={"sub": user.email}
     )
     
     # Return the token
-    return schemas.Token(access_token=access_token, token_type="bearer")
+    return {"access_token":access_token,"token_type":"bearer"}
