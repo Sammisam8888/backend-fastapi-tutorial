@@ -1,5 +1,6 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
+
 
 #default schema to see a data object
 class BlogBase(BaseModel):
@@ -9,7 +10,7 @@ class BlogBase(BaseModel):
 
 class Blog(BlogBase):
     class Config():
-        orm_mode=True
+        from_attribute=True
 
 class USER(BaseModel):
     name:str
@@ -21,21 +22,30 @@ class showuser(BaseModel):
     email:str
     blogs:List[Blog] =[]
     class Config():
-        orm_mode=True
+        from_attributes=True
 
 class showuserblog(BaseModel):
     name:str
     email:str
     class Config():
-        orm_mode=True
+        from_attributes=True
 #schema to see a data object in a particular format
 class Showblog(BaseModel):
     title:str
     body:str
     creator:showuserblog
     class Config():
-        orm_mode=True
+        from_attributes=True
 
 class Login(BaseModel):
     email:str
     password:str
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    email: Optional[str]=None
+

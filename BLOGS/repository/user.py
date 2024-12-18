@@ -1,8 +1,6 @@
-from fastapi import APIRouter, Depends, status, HTTPException
-from typing import List
+from fastapi import  Depends, status, HTTPException
 import schemas,models,database
 from sqlalchemy.orm import Session
-from sqlalchemy.orm import relationship
 import password_hashing as hashing
 
 get_db=database.get_db
