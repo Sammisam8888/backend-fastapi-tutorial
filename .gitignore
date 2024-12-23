@@ -1,3 +1,5 @@
-__pychache__
-fastapi-tutorial
+__pycache__/
+*.pyc
+*.pyo
+fastapi-env
 openapi.json

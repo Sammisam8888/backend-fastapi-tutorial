@@ -3,8 +3,6 @@ import schemas,models
 from sqlalchemy.orm import Session
 import password_hashing as hashing
 
-
-
 def create_user(request:schemas.USER,db:Session):
 
     
