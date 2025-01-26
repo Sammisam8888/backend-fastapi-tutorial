@@ -1,6 +1,6 @@
-import jwt
+import PyJWT
 from datetime import datetime, timedelta, timezone 
-from jwt.exceptions import PyJWTError
+from PyJWT.exceptions import PyJWTError
 import schemas
 from fastapi import HTTPException, status
 
@@ -16,12 +16,12 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     else:
         expire = datetime.now(timezone.utc) + timedelta(minutes=15)
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = PyJWT.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
     return encoded_jwt
 
 def verify_token(token: str):
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = PyJWT.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         email: str = payload.get("sub")
         if email is None:
             raise PyJWTError

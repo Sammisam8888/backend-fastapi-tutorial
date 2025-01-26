@@ -3,6 +3,5 @@ uvicorn
 sqlalchemy
 passlib
 bcrypt
-jwt
 PyJWT
 python-multipart

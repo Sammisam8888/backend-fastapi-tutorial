@@ -7,7 +7,19 @@ python3 -m venv "fastapi-env"
 source ./fastapi-env/bin/activate
 
 pip install -r requirements.txt
+
 ```
+
+To access the BLOGS directory 
+```
+cd BLOGS/
+```
+
+To run the fastapi server
+```
+uvicorn main:app --reload
+```
+
 
 To deactivate the virtual environment, run
 ```
